@@ -18,7 +18,7 @@ export class UserRepository {
       user.firstName = createUser.firstName;
       user.lastName = createUser.lastName;
       user.email = createUser.email;
-      user.active = createUser.active;
+      user.active = true
     
       return user;
     }

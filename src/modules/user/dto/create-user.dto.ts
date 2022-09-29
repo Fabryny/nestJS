@@ -6,5 +6,4 @@ export class CreateUserDto implements UserCreateableInterface {
     firstName!: string;
     lastName!: string;
     email!: string;
-    active!: boolean;
 }

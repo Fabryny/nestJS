@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -6,11 +6,16 @@ import { User } from './entities/user.entity';
 import { UserRepository } from './user.repository';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(private userRepository: UserRepository) { }
 
   public create(createUser: CreateUserDto): User {
-    return  this.userRepository.create(createUser);
+    try {
+      return  this.userRepository.create(createUser);
+    } catch (e) {
+      throw new BadRequestException('Something went wrong')
+    }
+
   }
 
   public findAll() {
