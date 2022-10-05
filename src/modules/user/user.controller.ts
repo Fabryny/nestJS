@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, UsePipes } from '@nestjs/common';
 import { UsersService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { IsUUIDParam } from 'src/common/decorators/is-uuidparam';
 
 @Controller('user')
 export class UserController {
@@ -18,12 +19,12 @@ export class UserController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@IsUUIDParam('id') id: string) {
     return this.UsersService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@IsUUIDParam('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.UsersService.update(id, updateUserDto);
   }
 
