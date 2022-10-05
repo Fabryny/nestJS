@@ -3,6 +3,7 @@ import { UsersService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { IsUUIDParam } from 'src/common/decorators/is-uuidparam';
+import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
@@ -13,6 +14,13 @@ export class UserController {
     return this.UsersService.create(createUserDto);
   }
 
+  @ApiOperation({
+    operationId:'user_findAll',
+    description: 'return all users'
+  })
+  @ApiOkResponse({
+    description: 'User was created with success'
+  })
   @Get()
   findAll() {
     return this.UsersService.findAll();
