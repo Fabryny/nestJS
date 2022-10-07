@@ -1,5 +1,6 @@
 import { registerAs } from "@nestjs/config";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { UserSubscriber } from "src/modules/user/user.subscribe";
 
 
 export const typeormConfig = registerAs(
@@ -15,7 +16,7 @@ export const typeormConfig = registerAs(
             ? process.env.DATABASE_MIGRATIONS_RUN === 'true'
             : false,
             entities: [__dirname + '/../**/*.entity.{js,ts}'],
-            subscribers: [],
+            subscribers: [UserSubscriber],
             synchronize:
             'string' === typeof process.env.DATABASE_SYNCHRONIZE
             ? process.env.DATABASE_SYNCHRONIZE === 'true'
