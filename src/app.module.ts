@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { typeormConfig } from './common/config/typeorm.config';
 import { UserController } from './modules/user/user.controller';
 import { UserModule } from './modules/user/user.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -18,7 +19,9 @@ import { UserModule } from './modules/user/user.module';
       useFactory: async (config: ConfigType<typeof typeormConfig>) => config,
     }),
    
-    UserModule],
+    UserModule,
+   
+    RoleModule],
   controllers: [AppController, UserController],
   providers: [AppService],
 })

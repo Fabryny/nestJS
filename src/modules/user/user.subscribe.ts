@@ -17,7 +17,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
 
     async beforeUpdate(event: UpdateEvent<User>) {
         await this._checkEmailUniqueness(event);
-/*         await this._hashUpdatedPassword(event);  ELE NAO MOSTROU NA AULA*/
+        await this._hashUpdatedPassword(event); 
     }
 
     async _hashPassword(user: User) {
@@ -30,6 +30,31 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
         await this._hashPassword(user);
         return;
     }
+
+    async _hashUpdatedPassword(event: UpdateEvent<User>) {
+        // user being updated
+        const user = event.entity as User;
+    
+        // get existing record
+        const currentRecord = await event.manager.findOne(User, {
+          where: {
+            id: user.id,
+          },
+        });
+    
+        // has it changed?
+        if (
+          currentRecord?.password &&
+          user?.password &&
+          user.password !== currentRecord.password
+        ) {
+          // yes, hash the password
+          await this._hashPassword(user);
+        }
+    
+        // all done
+        return;
+      }
 
     async _checkEmailUniqueness(event: InsertEvent<User> | UpdateEvent<User>) {
         const user = event.entity;
