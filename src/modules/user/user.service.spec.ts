@@ -4,10 +4,10 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user-dto';
 import { User } from './entities/user.entity';
 import { UserRepository } from './user.repository';
-import { UsersService } from './user.service';
+import { UserService } from './user.service';
 
-describe('UsersService', () => {
-  let service: UsersService;
+describe('UserService', () => {
+  let service: UserService;
   let repository: UserRepository;
   
   const DefaultUserDto: User = {
@@ -24,10 +24,10 @@ describe('UsersService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService, UserRepository],
+      providers: [UserService, UserRepository],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
+    service = module.get<UserService>(UserService);
     repository = module.get<UserRepository>(UserRepository);
   });
 
@@ -37,7 +37,7 @@ describe('UsersService', () => {
   });
 
 
-  describe(UsersService.prototype.create, () => {
+  describe(UserService.prototype.create, () => {
 
     it('should be success', () => {
       jest.spyOn(repository, 'create').mockReturnValue(DefaultUserDto);
@@ -56,7 +56,7 @@ describe('UsersService', () => {
     
   });
 
-  describe(UsersService.prototype.update, () => {
+  describe(UserService.prototype.update, () => {
     it('should be defined', () => {  
       jest.spyOn(repository, 'update').mockReturnValue(DefaultUserDto);
       const user = service.update('1', DefaultUserDto);
@@ -64,7 +64,7 @@ describe('UsersService', () => {
     });
   });
 /* 
-  describe(UsersService.prototype.findAll, () => {
+  describe(UserService.prototype.findAll, () => {
     it('should be defined', () => {
       expect(service).toBeDefined();
       expect(repository).toBeDefined();

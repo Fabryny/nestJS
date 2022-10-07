@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, UsePipes } from '@nestjs/common';
-import { UsersService } from './user.service';
+import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { IsUUIDParam } from 'src/common/decorators/is-uuidparam';
@@ -7,11 +7,11 @@ import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly UsersService: UsersService) {}
+  constructor(private readonly UserService: UserService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.UsersService.create(createUserDto);
+    return this.UserService.create(createUserDto);
   }
 
   @ApiOperation({
@@ -23,21 +23,21 @@ export class UserController {
   })
   @Get()
   findAll() {
-    return this.UsersService.findAll();
+    return this.UserService.findAll();
   }
 
   @Get(':id')
   findOne(@IsUUIDParam('id') id: string) {
-    return this.UsersService.findOne(id);
+    return this.UserService.findOne(id);
   }
 
   @Patch(':id')
   update(@IsUUIDParam('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.UsersService.update(id, updateUserDto);
+    return this.UserService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.UsersService.remove(id);
+    return this.UserService.remove(id);
   }
 }

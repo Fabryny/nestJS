@@ -1,9 +1,9 @@
 import { UserInterface } from "../interfaces/user.interface";
 
 export class UserDto implements UserInterface {
-    id: number;
+    id: string;
     createdAt: Date;
-    updateAt: Date;
+    updatedAt: Date;
     username: string;
     password: string;
     salt: string;

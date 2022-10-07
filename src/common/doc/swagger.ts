@@ -8,7 +8,7 @@ export async function swagger(app: INestApplication, environment: string) {
 
     const docOpt = new DocumentBuilder()
     .setTitle("My first api with NestJs")
-    .setVersion('.0')
+    .setVersion('1.0')
     .addBearerAuth()
     .build();
 
