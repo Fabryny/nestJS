@@ -7,6 +7,7 @@ import { typeormConfig } from './common/config/typeorm.config';
 import { UserController } from './modules/user/user.controller';
 import { UserModule } from './modules/user/user.module';
 import { RoleModule } from './role/role.module';
+import { UserRoleModule } from './user-role/user-role.module';
 
 @Module({
   imports: [
@@ -20,8 +21,10 @@ import { RoleModule } from './role/role.module';
     }),
    
     UserModule,
-   
-    RoleModule],
+    RoleModule,
+    UserRoleModule
+  ],
+    
   controllers: [AppController, UserController],
   providers: [AppService],
 })

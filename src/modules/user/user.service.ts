@@ -31,7 +31,7 @@ export class UserService {
 
 public async findAll(): Promise<UserDto[]> {
   const users = await this.repo.find({
-  /*   relations: ['userRoles'] */
+    relations: ['userRoles']
   });
   return plainToInstance(UserDto, users);
 }

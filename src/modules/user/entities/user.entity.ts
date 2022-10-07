@@ -1,5 +1,7 @@
 import { CommonEntity } from "src/common/common-entity";
-import { Column, Entity, Unique } from "typeorm";
+import { Role } from "src/role/entities/role.entity";
+import { UserRole } from "src/user-role/user-role.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, Unique } from "typeorm";
 import { UserInterface } from "../interfaces";
 
 @Entity()
@@ -30,4 +32,13 @@ export class User extends CommonEntity implements UserInterface {
     
     @Column({default: true, nullable: false})
     active: boolean;
+
+    @OneToMany(() => UserRole, (userRole) => userRole.user)
+    userRoles?: UserRole[];
+
+/*     @ManyToMany(() => Role, (role) => role.users, {
+        cascade: true
+    })
+    @JoinTable()
+    roles!: Role[]; */
 }
